@@ -6,14 +6,13 @@
         <v-flex xs12 sm6>
           <v-layout row wrap>
             <v-flex xs12 sm6 v-for="features in fitur" :key="features.item">
-
               <!-- card view item 1  -->
-              <v-card flat class="text-sm-center ma-3 rounded-xl">
-                <v-responsive class="pt-4 px-4">
+              <v-card flat class="text-sm-center ma-4 py-12 rounded-xl">
+                <v-responsive class="pt-8 px-8">
                   <v-icon>{{ features.icon }}</v-icon>
                 </v-responsive>
                 <v-card-text>
-                  <div class="subheading">{{ features.item }}</div>
+                  <div class="cardFont">{{ features.item }}</div>
                 </v-card-text>
               </v-card>
               <!-- end card view item 1  -->
@@ -76,20 +75,20 @@
     data: () => ({
       fitur: [
         {
-          item: 'Lorem Ipsum 1',
-          icon: 'mdi-view-dashboard'
-        },
-        {
-          item: 'Lorem Ipsum 2',
-          icon: 'mdi-view-dashboard'
+          item: 'Tambah Event',
+          icon: 'mdi-plus mdi-36px'
         },
         {
           item: 'Lorem Ipsum 3',
-          icon: 'mdi-view-dashboard'
+          icon: 'mdi-view-dashboard mdi-36px'
         },
         {
           item: 'Lorem Ipsum 4',
-          icon: 'mdi-view-dashboard'
+          icon: 'mdi-view-dashboard mdi-36px'
+        },
+        {
+          item: 'Todo list',
+          icon: 'mdi-clipboard-check-outline mdi-36px'
         },
       ],
       messages: [
@@ -116,4 +115,9 @@
   }
 </script>
 
-
+<style scoped>
+.cardFont{
+  font-weight: 200;
+  font-size: 1rem;
+}
+</style>

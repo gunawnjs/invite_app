@@ -1,9 +1,9 @@
 <template>
-  <v-app id="inspire">
-    <Navbar />
-    <v-content class="grey lighten-3">
+  <v-app id="App">
+    <Navbar v-if="Navbar"/>
+    <v-main class="grey lighten-3">
       <router-view/>
-    </v-content>
+    </v-main>
 
   </v-app>
 </template>
@@ -15,6 +15,7 @@ export default {
   name: 'App',
   components: { Navbar },
   data: () => ({
+     Navbar:true,
      links: [
         'Dashboard',
         'Messages',
@@ -22,10 +23,17 @@ export default {
         'Updates',
       ],
   }),
+  // halaman dimuat ?
+  mounted(){
+      this.Navbar=this.$route.name == 'Login' ? false:true
+  }
 };
 </script>
 
 <style>
+#App{
+  font-family:'Montserrat', sans-serif;
+}
 .wrapper{
   height:auto;
   min-height:100%;
