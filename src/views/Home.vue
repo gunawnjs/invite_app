@@ -29,11 +29,11 @@
                 >
 
                 <div class="display-3 text-center mt-12 white--text">
-                  12:00
+                 <span> {{ currentTime }}</span>
                 </div>
                 
                 <div class="subheading text-center mt-2 white--text">
-                  19 November 2020
+                  {{ currentDate }}
                 </div>
                 </v-img>
 
@@ -71,6 +71,8 @@
 </template>
 
 <script>
+const moment = require('moment');
+
   export default {
     data: () => ({
       fitur: [
@@ -79,8 +81,8 @@
           icon: 'mdi-plus mdi-36px'
         },
         {
-          item: 'Lorem Ipsum 3',
-          icon: 'mdi-view-dashboard mdi-36px'
+          item: 'Bergabung',
+          icon: 'mdi-video mdi-36px'
         },
         {
           item: 'Lorem Ipsum 4',
@@ -111,8 +113,25 @@
           color: 'deep-purple lighten-1',
         },
       ],
+      // menggunakan moment.js untuk display jam
+      currentTime:null,
+      currentDate:null
     }),
+    methods: 
+    {
+    updateCurrentTime() {
+      this.currentDate = moment().format('LL');
+      this.currentTime = moment().format('HH:mm');
+    }
+  },
+    created() {
+      moment.locale('id')
+      this.currentDate = moment().format('LL');
+      this.currentTime = moment().format('HH:mm');
+      setInterval(() => this.updateCurrentTime(), 1 * 1000);
+    }
   }
+
 </script>
 
 <style scoped>

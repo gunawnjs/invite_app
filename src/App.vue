@@ -9,25 +9,29 @@
 </template>
 
 <script>
+  
 import Navbar from './components/Navbar';
+import moment from 'moment';
 
 export default {
   name: 'App',
   components: { Navbar },
   data: () => ({
-     Navbar:true,
-     links: [
-        'Dashboard',
-        'Messages',
-        'Profile',
-        'Updates',
-      ],
-  }),
+   Navbar:true,
+   links: [
+      'Dashboard',
+      'Messages',
+      'Profile',
+      'Updates',
+    ],
+    moment: moment
+}),
   // halaman dimuat ?
-  mounted(){
-      this.Navbar=this.$route.name == 'Login' ? false:true
-  }
+    mounted(){
+        this.Navbar=this.$route.name == 'Login' ? false:true
+    }
 };
+
 </script>
 
 <style>

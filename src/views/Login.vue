@@ -13,45 +13,103 @@
           v-model="valid"
           lazy-validation
         >
-        <div class="pt-16 my-8">
-          <v-text-field
-            v-model="email"
-            :rules="emailRules"
-            label="E-mail"
-            outlined
-            required
-          ></v-text-field>
-          
-          <v-text-field
-            v-model="password"
-            :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-            :rules="passwordRules"
-            :type="showPassword ? 'text' : 'password'"
-            label="Password"
-            @click:append="showPassword = !showPassword"
-            outlined
-            required
-          ></v-text-field>
-          <v-btn
-            class="white--text"
-            :disabled="!valid"
-            color="light-blue darken-1"
-            @click="validate"
-            block
-            depressed
-          >
-            Login
-          </v-btn>
-          <v-btn
-            color="primary"
-            class="py-8"
-            block
-            text
-            small
-          >
-            Buat akun
-          </v-btn>
-        </div>
+        <v-window v-model="step">
+          <v-window-item  :value="1">            
+            <v-card-text>
+              <div class="pt-16 my-8">
+                <v-text-field
+                  v-model="email"
+                  :rules="emailRules"
+                  label="E-mail"
+                  outlined
+                  required
+                ></v-text-field>
+                
+                <v-text-field
+                  v-model="password"
+                  :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                  :rules="passwordRules"
+                  :type="showPassword ? 'text' : 'password'"
+                  label="Password"
+                  @click:append="showPassword = !showPassword"
+                  outlined
+                  required
+                ></v-text-field>
+                <v-btn
+                  class="white--text"
+                  :disabled="!valid"
+                  color="light-blue darken-1"
+                  @click="validate"
+                  block
+                  depressed
+                >
+                  Login
+                </v-btn>
+                <v-btn
+                  color="primary"
+                  class="py-5 mt-3"
+                  @click="step++"
+                  block
+                  text
+                  small
+                >
+                  Buat akun
+                </v-btn>
+              </div>
+            </v-card-text>
+          </v-window-item>
+
+          <v-window-item  :value="2">            
+            <v-card-text>
+              <div>
+                <v-text-field
+                  v-model="nama"
+                  :rules="namaRules"
+                  label="Nama Lengkap"
+                  outlined
+                  required
+                />
+                <v-text-field
+                  v-model="email"
+                  :rules="emailRules"
+                  label="E-mail"
+                  outlined
+                  required
+                />           
+                <v-text-field
+                  v-model="password"
+                  :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                  :rules="passwordRules"
+                  :type="showPassword ? 'text' : 'password'"
+                  label="Password"
+                  @click:append="showPassword = !showPassword"
+                  outlined
+                  required
+                />
+                <v-text-field
+                  v-model="password"
+                  :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                  :rules="passwordRules"
+                  :type="showPassword ? 'text' : 'password'"
+                  label="Konfirmasi"
+                  @click:append="showPassword = !showPassword"
+                  outlined
+                  required
+                 />
+                <v-btn
+                  color="light-blue darken-1"
+                  class="white--text py-5 mt-3"
+                  @click="step--"
+                  block
+                  small
+                  depressed
+                >
+                  Buat akun
+                </v-btn>
+              </div>
+            </v-card-text>
+          </v-window-item>
+        </v-window>
 
         </v-form>
       </v-card>
@@ -62,16 +120,22 @@
 <script>
   export default {
     data: () => ({
+      step:1,
       valid: true,
+      nama: '',
+      namaRules: [
+        v => !!v || 'Masukan nama lengkap !',
+        v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
+      ],
       email: '',
       emailRules: [
-        v => !!v || 'E-mail is required',
+        v => !!v || 'Alamat surel anda belum terisi !',
         v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
       ],
       showPassword:false,
       password: '',
       passwordRules: [
-        v => !!v || 'Password masih kosong',
+        v => !!v || 'Password anda masih kosong !',
       ],
     }),
 
@@ -86,7 +150,6 @@
 <style scoped>
 .login{
   width: 100%;
-  height: 35rem;
   max-width: 30rem;
   margin: 0 auto;
 }
